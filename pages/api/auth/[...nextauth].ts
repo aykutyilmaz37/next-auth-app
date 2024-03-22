@@ -18,7 +18,6 @@ export default NextAuth({
         });
         const data = await res.data;
         if (data.status === true) {
-          localStorage.setItem('token', data.data.token);
           return {
             id: data.data.id,
             name: data.data.fullName,
