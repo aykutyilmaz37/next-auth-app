@@ -18,11 +18,11 @@ export default NextAuth({
         });
         const data = await res.data;
         if (data.status === true) {
+      
           return {
-            id: data.data.id,
+            id: data.data.token,
             name: data.data.fullName,
             email: data.data.email,
-            token: data.data.token, 
           };
         } else {
           // Login Failed
@@ -36,8 +36,14 @@ export default NextAuth({
   },
   callbacks: {
     async session({ session, token, user }) {
-      session.user = token
+      session.user = token;
       return session;
-    }
+    },
+    async jwt({ token, user, account }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
   }
 });
