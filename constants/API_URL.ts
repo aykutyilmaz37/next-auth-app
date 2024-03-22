@@ -1,0 +1,1 @@
+export const API_URL: string = 'https://api.management.parse25proje.link/api'
